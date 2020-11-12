@@ -8,3 +8,26 @@ sudo docker build -t xxx .      # xxx代表镜像命名
 ```
 sudo docker run -d --gpus all --shm-size 1g -p 3389:3389 xxx
 ```
+## 采用docker-compose启动
+由于这里开启了cuda,所以需要在`/etc/docker/daemon.json`文件添加
+```
+"runtimes": {
+"nvidia": {
+"path": "/usr/bin/nvidia-container-runtime",
+"runtimeArgs": []
+}
+}
+```
+接下来重启docker服务
+```
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+启动compose
+```
+sudo docker-compose -d up
+```
+关闭compose
+```
+sudo docker-compose down
+```
