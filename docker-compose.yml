@@ -1,0 +1,12 @@
+version: '3.5'
+services:
+  terminalserver:
+    image: cuda10.2-cudnn8-opencv4.5-xrdp-ubuntu18.04
+    restart: always
+    shm_size: 1g
+    ports:
+      - "3388:3389"
+      - "2222:22"
+    volumes:
+      - /home/supernode/docker/project:/project
+    runtime: nvidia
